@@ -33,12 +33,7 @@ public class ControlPrincipal {
 	}
 
 	private void initMenuPrincipal(String idUsr) {
-		try {
-			fachada = new Datos();
-		} 
-		catch (DatosException e) {
-			e.printStackTrace();
-		}
+		fachada = new Datos();
 		vistaPrincipal = new VistaPrincipal();
 		sesionUsr = new ControlInicioSesion(idUsr).getSesion();
 		secuenciaPrincipal();

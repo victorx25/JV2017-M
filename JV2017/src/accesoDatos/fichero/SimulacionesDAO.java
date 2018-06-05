@@ -62,7 +62,7 @@ public class SimulacionesDAO implements OperacionesDAO, Persistente {
 	 *  @return instancia
 	 * @throws DatosException 
 	 */
-	public static SimulacionesDAO getInstancia() throws DatosException {
+	public static SimulacionesDAO getInstancia() {
 		if (instancia == null) {
 			instancia = new SimulacionesDAO();
 		}

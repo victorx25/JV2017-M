@@ -31,7 +31,7 @@ public class Datos {
 	 * Constructor por defecto.
 	 * @throws DatosException 
 	 */
-	public Datos() throws DatosException {
+	public Datos() {
 		usuariosDAO = UsuariosDAO.getInstancia();
 		sesionesDAO = SesionesDAO.getInstancia();
 		simulacionesDAO = SimulacionesDAO.getInstancia();

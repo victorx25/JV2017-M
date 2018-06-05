@@ -35,12 +35,7 @@ public class ControlInicioSesion {
 	}
 
 	private void initControlSesion(String idUsr) {
-		try {
-			fachada = new Datos();
-		} 
-		catch (DatosException e) {
-			e.printStackTrace();
-		}
+		fachada = new Datos();
 		vistaSesion = new VistaInicioSesion();
 		vistaSesion.mostrarMensaje(Configuracion.get().getProperty("aplicación.titulo"));
 		iniciarSesionUsuario(idUsr);
