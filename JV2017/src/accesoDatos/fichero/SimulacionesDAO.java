@@ -310,4 +310,16 @@ public class SimulacionesDAO implements OperacionesDAO, Persistente {
 		cargarPredeterminados();
 	}
 
+	@Override
+	public ArrayList<Object> obtenerTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String listarId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 } //class

@@ -37,7 +37,6 @@ public class SimulacionesDAO implements OperacionesDAO{
 			}
 		}
 		
-
 		/**
 		 *  Método estático de acceso a la instancia única.
 		 *  Si no existe la crea invocando al constructor interno.
@@ -52,8 +51,7 @@ public class SimulacionesDAO implements OperacionesDAO{
 			}
 			return instancia;
 		}
-		
-		
+			
 		/**
 		 *  Método para generar de datos predeterminados.
 		 *  @author GRUPO 1 DAM - Francisco Jurado Abad
@@ -96,14 +94,11 @@ public class SimulacionesDAO implements OperacionesDAO{
 			}		
 		}
 
-
-
 		@Override
 		public Object obtener(Object obj) throws DatosException {
 			// TODO Auto-generated method stub
 			return null;
 		}
-
 
 		@Override
 		public void alta(Object obj) throws DatosException {
@@ -111,13 +106,11 @@ public class SimulacionesDAO implements OperacionesDAO{
 			
 		}
 
-
 		@Override
 		public Object baja(String id) throws DatosException {
 			// TODO Auto-generated method stub
 			return null;
 		}
-
 
 		@Override
 		public void actualizar(Object obj) throws DatosException {
@@ -125,13 +118,11 @@ public class SimulacionesDAO implements OperacionesDAO{
 			
 		}
 
-
 		@Override
 		public String listarDatos() {
 			// TODO Auto-generated method stub
 			return null;
 		}
-
 
 		@Override
 		public void borrarTodo() {
@@ -139,19 +130,21 @@ public class SimulacionesDAO implements OperacionesDAO{
 			
 		}
 
-
 		@Override
 		public void cerrar() {
 			// TODO Auto-generated method stub
 			
 		}
-		
-		/**
-		 * Obtiene todos las simulaciones almacenadas.
-		 * @return - la List con todas las simulaciones.
-		 * @author GRUPO 1 DAM
-		 */
-		public List <Simulacion> obtenerTodasSimulacion() {
+
+		@Override
+		public List obtenerTodos() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String listarId() {
+			// TODO Auto-generated method stub
 			return null;
 		}
 

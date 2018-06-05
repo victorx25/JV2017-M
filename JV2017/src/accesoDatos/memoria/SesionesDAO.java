@@ -233,5 +233,17 @@ public class SesionesDAO implements OperacionesDAO {
 	public void cerrar() {
 		// Nada que hacer si no hay persistencia.	
 	}
+
+	@Override
+	public ArrayList<Object> obtenerTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String listarId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }//class

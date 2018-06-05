@@ -3,22 +3,24 @@
  * Interfaz con las operaciones básicas DAO, necesarias para la fachada.
  * @since: prototipo2.0
  * @source: OperacionesDAO.java  
- * @version: 2.0 - 2018.04.23 
+ * @version: 2.1 - 2018.05.07 
  * @author: ajp
  */
 
 package accesoDatos;
 
+import java.util.List;
+
 public interface OperacionesDAO {
 
 	/**
 	 * Obtiene el objeto dado el id utilizado para el almacenamiento.
-	 * @param id - el idUsr de Usuario a obtener.
+	 * @param id - el identificador del objeto a obtener.
 	 * @return - el Usuario encontrado; DatosException si no existe.
 	 * @throws DatosException 
 	 */	
 	Object obtener(String id) throws DatosException;
-
+	
 	/**
 	 * Obtiene el objeto, dado otro objeto igual.
 	 * reenvía al método que utiliza id.
@@ -27,6 +29,12 @@ public interface OperacionesDAO {
 	 * @throws DatosException 
 	 */
 	Object obtener(Object obj) throws DatosException;
+	
+	/**
+	 * Obtiene todos los objetos almacenados.
+	 * @return - List de los objetos encontrados.
+	 */	
+	List obtenerTodos();
 	
 	/**
 	 *  Alta de un objeto en el almacén de datos, 
@@ -58,6 +66,12 @@ public interface OperacionesDAO {
 	String listarDatos();
 
 	/**
+	 * Obtiene el listado de todos los id de los datos almacenados.
+	 * @return el texto con el volcado de ids.
+	 */
+	String listarId();
+	
+	/**
 	 * Elimina todos los datos y restaura predeterminados.
 	 */
 	void borrarTodo();
@@ -65,6 +79,6 @@ public interface OperacionesDAO {
 	/**
 	 *  Cierra datos.
 	 */
-	public void cerrar();
+	void cerrar();
 	
 } // interface

@@ -294,4 +294,16 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 		return datosSesiones.size();
 	}
 
+	@Override
+	public ArrayList<Object> obtenerTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String listarId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }//class
