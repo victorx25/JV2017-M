@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import accesoDatos.Datos;
 import accesoDatos.DatosException;
-import accesoUsr.consola.VistaPrincipal;
+import accesoUsr.consola.vista.VistaPrincipal;
 import modelo.ModeloException;
 import modelo.SesionUsuario;
 import modelo.Simulacion;

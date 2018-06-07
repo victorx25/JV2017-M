@@ -11,7 +11,7 @@ package accesoUsr.consola.control;
 
 import accesoDatos.Datos;
 import accesoDatos.DatosException;
-import accesoUsr.consola.VistaInicioSesion;
+import accesoUsr.consola.vista.VistaInicioSesion;
 import config.Configuracion;
 import modelo.ClaveAcceso;
 import modelo.ModeloException;

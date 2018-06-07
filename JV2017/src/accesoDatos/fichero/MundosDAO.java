@@ -86,7 +86,7 @@ public class MundosDAO implements OperacionesDAO, Persistente {
 			{ 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 1x Flip-Flop
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }  // 1x Still Life
 		};
-		Mundo mundoDemo = new Mundo("MundoDemo", new ArrayList<Integer>(), new Hashtable<Patron,Posicion>());
+		Mundo mundoDemo = new Mundo("Demo0", new ArrayList<Integer>(), new Hashtable<Patron,Posicion>());
 		datosMundos.add(mundoDemo);
 	}
 	
