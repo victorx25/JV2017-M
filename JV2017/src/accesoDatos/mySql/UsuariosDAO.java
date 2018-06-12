@@ -192,7 +192,7 @@ public class UsuariosDAO implements OperacionesDAO {
 	}
 
 	/**
-	 * Replica en el tableModel las filas del ResultSet
+	 * Replica en el tableModel las filas del ResultSet.
 	 */
 	private void rellenarFilasModelo() {
 		Object[] datosFila = new Object[tmUsuarios.getColumnCount()];
