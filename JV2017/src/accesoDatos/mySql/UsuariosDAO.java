@@ -17,6 +17,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.table.DefaultTableModel;
+
 import com.mysql.jdbc.Connection;
 
 import accesoDatos.DatosException;
@@ -37,9 +39,11 @@ public class UsuariosDAO implements OperacionesDAO {
 
 	private Connection db; // Conexion
 	
-	private Statement sentenciasUsr;
+	private Statement sentenciaUsr;
 	private ResultSet rsUsuarios;
+	private DefaultTableModel tmUsuarios;
 	private ArrayList<Object> bufferObjetos;
+	
 	/**
 	 * Método estático de acceso a la instancia única. Si no existe la crea
 	 * invocando al constructor interno. Utiliza inicialización diferida. Sólo se
@@ -155,7 +159,7 @@ public class UsuariosDAO implements OperacionesDAO {
 	public Usuario obtener(Object id) throws DatosException { //Correcto y completo
 		// Se realiza la consulta y los resultados quedan en el ResultSet
 		try {
-			rsUsuarios = sentenciasUsr.executeQuery
+			rsUsuarios = sentenciaUsr.executeQuery
 						("SELECT * FROM usuarios WHERE idUsr = '" + id + "'");
 			
 			
@@ -187,9 +191,26 @@ public class UsuariosDAO implements OperacionesDAO {
 		
 	}
 
+	/**
+	 * Replica en el tableModel las filas del ResultSet. 
+	 */
 	private void rellenarFilasModelo() {
-		// TODO Auto-generated method stub
-		
+		Object[] datosFila = new Object[tmUsuarios.getColumnCount()];
+		//Para cada fila en el resultSet de la consulta
+		try {
+			while(rsUsuarios.next()) {
+				//Se replica y añade la fila en el tableModel
+				//El primer elemento de un tableModel tiene indice 1
+				for(int i=0; i<tmUsuarios.getColumnCount(); i++) {
+					datosFila[i] = rsUsuarios.getObject(i+1);
+				}
+				tmUsuarios.addRow(datosFila);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private void borrarFilasModelo() {
