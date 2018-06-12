@@ -12,8 +12,11 @@
 package accesoDatos.mySql;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.List;
+
+import com.mysql.jdbc.Connection;
 
 import accesoDatos.DatosException;
 import accesoDatos.OperacionesDAO;
@@ -30,6 +33,8 @@ import util.Fecha;
 public class UsuariosDAO implements OperacionesDAO {
 
 	private static UsuariosDAO instancia = null;
+
+	private Connection db; // Conexion
 
 	/**
 	 * Método estático de acceso a la instancia única. Si no existe la crea
@@ -49,19 +54,72 @@ public class UsuariosDAO implements OperacionesDAO {
 		return instancia;
 	}// getInstancia()
 
-	
-	
 	/**
 	 * Constructor por defecto de uso interno. Sólo se ejecutará una vez.
 	 */
 	private UsuariosDAO() throws SQLException, DatosException {
-		// inicializar(); //Proximamente...
+		inicializar();
 		if (obtener("III1R") == null) {
 			cargarPredeterminados();
 		}
 	}
 
-	
+	/**
+	 * Inicializa el dao, detecta si existen las tablas de datos capturando la
+	 * excepcion SQLException
+	 * 
+	 * @throws SQLException
+	 */
+
+	private void inicializar() throws SQLException {
+
+		db = Conexion.getDb();
+
+		try {
+			obtener("III1R");
+			obtener("AAA0T");
+
+		} catch (DatosException e) {
+			crearTablaUsuarios();
+			crearTablaEquivalid();
+		}
+
+	}
+
+	/**
+	 * Crea la tabla de Usuarios en la base de datos
+	 * 
+	 * @throws SQLException
+	 */
+	private void crearTablaUsuarios() throws SQLException {
+
+		// se crea un Statement en la conexion a la BD, para realizar la operacion
+		Statement s = db.createStatement();
+
+		// Crea la tabla usuarios
+		s.executeUpdate("CREATE TABLE usuarios (" + "idUsr VARCHAR(5) NOT NULL," + "nif VARCHAR(9) NOT NULL,"
+				+ "nombre VARCHAR(45) NOT NULL," + "apellidos VARCHAR(45) NOT NULL," + "calle VARCHAR(45) NOT NULL,"
+				+ "numero VARCHAR(5) NOT NULL," + "cp VARCHAR(5) NOT NULL," + "poblacion VARCHAR(45) NOT NULL,"
+				+ "correo VARCHAR(45) NOT NULL," + "fechaNacimiento DATE," + "fechaAlta DATE,"
+				+ "claveAcceso VARCHAR(16) NOT NULL," + "rol VARCHAR(20) NOT NULL," + "PRIMARY KEY(idUSR));");
+
+	}
+
+	/**
+	 * Crea la tabla de equivalencias en la base de datos
+	 * 
+	 * @throws SQLException
+	 */
+	private void crearTablaEquivalid() throws SQLException {
+		// se crea un Statement en la conexion a la BD, para realizar la operacion
+		Statement s = db.createStatement();
+
+		// se crea la tabla de equivalencias
+		s.executeUpdate("CREATE TABLE equivalid (" + "equival VARCHAR(45) NOT NULL," + "idUsr VARCHAR(5) NOT NULL,"
+				+ "PRIMARY KEY(equival));");
+
+	}
+
 	/**
 	 * Método para generar datos predeterminados.
 	 * 
@@ -88,7 +146,6 @@ public class UsuariosDAO implements OperacionesDAO {
 		}
 	}// cargarPredeterminados()
 
-	
 	
 	
 	
