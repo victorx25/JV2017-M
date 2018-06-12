@@ -11,9 +11,10 @@
 
 package accesoDatos.mySql;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.jdbc.Connection;
@@ -35,7 +36,10 @@ public class UsuariosDAO implements OperacionesDAO {
 	private static UsuariosDAO instancia = null;
 
 	private Connection db; // Conexion
-
+	
+	private Statement sentenciasUsr;
+	private ResultSet rsUsuarios;
+	private ArrayList<Object> bufferObjetos;
 	/**
 	 * Método estático de acceso a la instancia única. Si no existe la crea
 	 * invocando al constructor interno. Utiliza inicialización diferida. Sólo se
@@ -147,11 +151,57 @@ public class UsuariosDAO implements OperacionesDAO {
 	}// cargarPredeterminados()
 
 	
+	@Override
+	public Usuario obtener(Object id) throws DatosException { //Correcto y completo
+		// Se realiza la consulta y los resultados quedan en el ResultSet
+		try {
+			rsUsuarios = sentenciasUsr.executeQuery
+						("SELECT * FROM usuarios WHERE idUsr = '" + id + "'");
+			
+			
+			//METODOS A RELLENAR: 
+			//Establece columnas y etiquetas
+			establecerColumnasModelo();
+			
+			//Borrado previo de filas
+			borrarFilasModelo();
+			
+			//Volcado desde el ResultSet
+			rellenarFilasModelo();
+			
+			//Actualizar buffer de objetos
+			sincronizarBufferObjetos();
+			if (bufferObjetos.size() > 0) {
+				return (Usuario) bufferObjetos.get(0);
+			}
+		}
+		catch (SQLException e) {
+			throw new DatosException("Obtener: "+ id + " no existe");
+		}
+		return null;
+	}
 	
 	
-	
-	
-	
+	private void sincronizarBufferObjetos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void rellenarFilasModelo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void borrarFilasModelo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void establecerColumnasModelo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public List obtenerTodos() {
 		// TODO Auto-generated method stub
@@ -200,11 +250,7 @@ public class UsuariosDAO implements OperacionesDAO {
 
 	}
 
-	@Override
-	public Object obtener(Object obj) throws DatosException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public Object obtener(String id) throws DatosException {
