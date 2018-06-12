@@ -1,3 +1,4 @@
+
 /** 
  * Proyecto: Juego de la vida.
  * Resuelve todos los aspectos del almacenamiento del DAO Simulacion. 
@@ -25,132 +26,192 @@ import accesoDatos.db4o.MundosDAO;
 import accesoDatos.db4o.UsuariosDAO;
 import modelo.Mundo;
 import modelo.Simulacion;
-import modelo.Usuario;
+
 import modelo.Simulacion.EstadoSimulacion;
+import modelo.Usuario;
 import util.Fecha;
-
+ 
 public class SimulacionesDAO implements OperacionesDAO {
-
-
-	// Singleton 
-	private static SimulacionesDAO instancia = null;
-
-	// Elemento de almacenamiento. Base datos db4o
-	private Connection db;
-
-	private java.sql.Statement sentenciaSim;
-	private ResultSet rsSimulaciones;
-	private DefaultTableModel tmSimulaciones;
-	private ArrayList<Object> bufferObjetos;
-
-	/**
-	 *  Método estático de acceso a la instancia única.
-	 *  Si no existe la crea invocando al constructor interno.
-	 *  Utiliza inicialización diferida.
-	 *  Sólo se crea una vez; instancia única -patrón singleton-
-	 *  @return instancia
-	 *  @author Grupo 1 - Alejandro Motellón 
-	 */
-	public static SimulacionesDAO getInstancia() throws SQLException, DatosException {
-		if (instancia == null) {
-			instancia = new SimulacionesDAO();
-		}
-		return instancia;
-	}
-
-	/**
-	 * Constructor por defecto de uso interno.
-	 * @throws SQLException
-	 * @throws DatosException
-	 * @author Grupo 1 - Alejandro Motellón 
-	 */
-	private SimulacionesDAO() throws SQLException, DatosException {
-		inicializar();
-		if (obtener("III1R")==null) {
-			cargarPredeterminados();
-		}
-	}
-
-	/**
-	 *  Método para generar de datos predeterminados.
-	 *  @author Grupo 1 - Alejandro Motellón 
-	 */
-	private void cargarPredeterminados() throws SQLException, DatosException {
-		Simulacion simulacionDemo = null;
-		try {
-			// Obtiene usuario y mundo predeterminados.
-			Usuario usrPredeterminado = UsuariosDAO.getInstancia().obtener("III1R");
-			Mundo mundoPredeterminado = MundosDAO.getInstancia().obtener("Demo0");
-			simulacionDemo = new Simulacion(usrPredeterminado, 
-					new Fecha(2005, 05, 05), mundoPredeterminado, 
-					EstadoSimulacion.PREPARADA);
-			alta(simulacionDemo);
-		} 
-		catch (DatosException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Inicializa el DAO, detecta si existen las tablas de datos capturando la 
-	 * excepción SQLException.
-	 * @throws SQLException
-	 * @author Grupo 1 - Alejandro Motellón 
-	 */
-	private void inicializar()throws SQLException{
-		bufferObjetos=new ArrayList<Object>();
-		db=Conexion.getDb();
-		try {
-			obtener("III1R");
-			obtener("AAAOT");
-
-		}
-		catch(DatosException e) {
-			crearTablaSimulaciones();
-
-		}
-	}
-
-	/**
-	 * Método para crear la tabla SQL
-	 * @throws SQLException
-	 * @author Grupo 1 - Alejandro Motellón 
-	 */
-	private void crearTablaSimulaciones() throws SQLException{
-		java.sql.Statement sentencia = db.createStatement();
-
-		sentencia.executeUpdate("CREATE TABLE simulaciones("
-				+ "idUsr VARCHAR(20) NOT NULL,"
-				+ "fecha DATE NOT NULL,"
-				+ "mundo VARCHAR (10) NOT NULL"
-				+ "estado VARCHAR (10) NOT NULL"
-				+ "PRIMARY KEY(idUsr, fecha));");
-	}
-
-
-	@Override
-	public Object obtener(String id) throws DatosException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object obtener(Object obj) throws DatosException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List obtenerTodos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void alta(Object obj) throws DatosException {
+ 
+    // Singleton  
+    private static SimulacionesDAO instancia = null;
+ 
+    // Elemento de almacenamiento. Base datos db4o
+    private Connection db;
+ 
+    private java.sql.Statement sentenciaSim;
+    private ResultSet rsSimulaciones;
+    private DefaultTableModel tmSimulaciones;
+    private ArrayList<Object> bufferObjetos;
+ 
+    /**
+     *  Método estático de acceso a la instancia única.
+     *  Si no existe la crea invocando al constructor interno.
+     *  Utiliza inicialización diferida.
+     *  Sólo se crea una vez; instancia única -patrón singleton-
+     *  @return instancia
+     */
+    public static SimulacionesDAO getInstancia() {
+       return null;
+    }
+ 
+    /**
+     * Constructor por defecto de uso interno.
+     * @throws SQLException
+     * @throws DatosException
+     */
+    private SimulacionesDAO() throws SQLException, DatosException {
+    
+    }
+ 
+    /**
+     * Inicializa el DAO, detecta si existen las tablas de datos capturando la  
+     * excepción SQLException.
+     * @throws SQLException
+     */
+    private void inicializar()throws SQLException{
+   
+ 
+      }
+   
+ 
+    private void crearTablaSimulaciones() throws SQLException{
+        java.sql.Statement sentencia = db.createStatement();
+ 
+        sentencia.executeUpdate("CREATE TABLE simulaciones("
+                + "idUsr VARCHAR(20) NOT NULL,"
+                + "fecha DATE NOT NULL,"
+                + "mundo VARCHAR (10) NOT NULL"
+                + "estado VARCHAR (10) NOT NULL"
+                + "PRIMARY KEY(idUsr, fecha));");
+    }
+ 
+ 
+ 
+ 
+    /**
+     *  Método para generar de datos predeterminados.
+     */
+    private void cargarPredeterminados() throws SQLException, DatosException {
+     
+    }
+ 
+ 
+    //Operaciones DAO
+ 
+    /**
+     * Obtiene una Sesion dado un objeto, reenvía al método que utiliza idSesion.
+     * @param obj - la Simulacion a buscar.
+     * @return - la Simulacion encontrada.
+     * @throws DatosException - si no existe.
+     */
+    @Override
+    public Simulacion obtener(Object obj) throws DatosException  {
+        return this.obtener(((Simulacion) obj).getIdSimulacion());
+    }
+ 
+    /**      
+     * Obtiene una simulación dado su id.
+     * @param idSimulacion - el idUsr+fecha de la Simulacion a buscar.  
+     * @return - la Simulacion encontrada.
+     * @throws DatosException - si no existe.
+     */    
+    public Simulacion obtener(String idSimulacion) throws DatosException {    
+        try {
+            rsSimulaciones=sentenciaSim.executeQuery("SELECT * FROM simulaciones WHERE idSim ='"+ idSimulacion +"'");
+ 
+            //Establece columndas y etiquetas
+            establecerColumnasModelo();
+ 
+            //Borrado previo de filas
+            rellenaFilasModelo();
+ 
+            //Volcado desde el resultSet
+            rellenaFilasModelo();
+ 
+ 
+            //Actualizar buffer de objetos
+            sincronizaBufferObjetos();
+            if(bufferObjetos.size()>0) {
+                    return (Simulacion) bufferObjetos.get(0);
+            }
+        }
+        catch(SQLException e){
+            throw new DatosException("Obtener:"+ idSimulacion + "no existe");
+        }
+        return null;
+ 
+    }
+ 
+ 
+    private void sincronizaBufferObjetos() {
 		// TODO Auto-generated method stub
 		
 	}
+
+	private void establecerColumnasModelo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void rellenaFilasModelo() {
+        Object[] datosFila = new Object[tmSimulaciones.getColumnCount()];
+        //INCOMPLETO
+        try {
+            while (rsSimulaciones.next()) {
+                for (int i=0; i< tmSimulaciones.getColumnCount();i++) {
+                    datosFila[i]=rsSimulaciones.getObject(i+1);
+                }
+                ((DefaultTableModel)tmSimulaciones).addRow(datosFila);
+            }
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	/**
+	 * Metodo que devuelve el resultado de una consulta sql
+	 * Con la lista completa de simulaciones
+	 * @author GRUPO 1 DAM - Francisco Jurado Abad
+	 */
+	public List<Simulacion> obtenerTodos() {
+		ResultSet rs = null;
+		String sql = "SELECT * FROM simulaciones";
+		try {
+			java.sql.Statement s =  db.createStatement();
+			rs = s.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return (List<Simulacion>) rs;
+		
+	}
+	/**
+	 * Metodo para dar de alta una simulacion con una consulta sql
+	 * @author GRUPO 1 DAM - Francisco Jurado Abad /
+	 */
+	@Override
+	public void alta(Object obj) throws DatosException {
+		assert obj != null;
+		 
+		Simulacion simulacion = (Simulacion) obj;
+		java.sql.Statement st;
+		String sql = "insert into simulacion (idUsr, fecha, mundo, estado) "
+				+ "values ('" + obtener(simulacion.getIdSimulacion()); 
+		try {
+			st = db.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			//db.store(simulacion);
+			
+			e.printStackTrace();
+		}
+		throw new DatosException("Alta: " + simulacion.getIdSimulacion() + " ya existe.");
 
 	@Override
 	public Object baja(String id) throws DatosException {
@@ -182,10 +243,16 @@ public class SimulacionesDAO implements OperacionesDAO {
 		
 	}
 
-	@Override
-	public void cerrar() {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     *  Cierra conexión.
+     */
+    @Override
+    public void cerrar() {
+        try {
+            db.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
