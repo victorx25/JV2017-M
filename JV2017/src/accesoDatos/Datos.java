@@ -11,7 +11,12 @@ package accesoDatos;
 
 import java.util.List;
 
-import accesoDatos.fichero.*;
+import accesoDatos.fichero.UsuariosDAO;
+import accesoDatos.fichero.SesionesDAO;
+import accesoDatos.fichero.SimulacionesDAO;
+import accesoDatos.fichero.MundosDAO;
+import accesoDatos.fichero.PatronesDAO;
+
 import modelo.ModeloException;
 import modelo.Mundo;
 import modelo.Patron;
@@ -197,7 +202,7 @@ public class Datos {
 	 * Reenvia petición al método DAO específico.
 	 */
 	public int getSesionesRegistradas() {
-		return sesionesDAO.totalRegistrado();
+		return sesionesDAO.obtenerTodos().size();
 	}
 	
 	// FACHADA simulacionesDAO

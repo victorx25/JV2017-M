@@ -10,7 +10,7 @@
 package accesoUsr.consola.control;
 
 import accesoDatos.Datos;
-import accesoUsr.consola.VistaSimulacion;
+import accesoUsr.consola.vista.VistaSimulacion;
 import config.Configuracion;
 import modelo.Mundo;
 import modelo.Simulacion;

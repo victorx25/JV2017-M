@@ -1,34 +1,32 @@
-/**  
+
+/** 
  * Proyecto: Juego de la vida.
- * Resuelve todos los aspectos del almacenamiento del DTO Simulacion.  
+ * Resuelve todos los aspectos del almacenamiento del DAO Simulacion. 
  * Utiliza base de datos db4o.
  * Colabora en el patron Fachada.
- * @since: prototipo2.0
- * @source: SimulacionesDAO.java  
- * @version: 2.1 - 2018.05.16
- * @author: ajp
+ * @since: prototipo2.1
+ * @source: SimulacionesDAO.java 
+ * @version: 2.2 - 2018.06.12
+ * @author: DAM Grupo 1
  */
- 
 package accesoDatos.mySql;
- 
+
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
- 
+
 import javax.swing.table.DefaultTableModel;
 
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
- 
- 
+
 import accesoDatos.DatosException;
 import accesoDatos.OperacionesDAO;
 import accesoDatos.db4o.MundosDAO;
 import accesoDatos.db4o.UsuariosDAO;
 import modelo.Mundo;
 import modelo.Simulacion;
+
 import modelo.Simulacion.EstadoSimulacion;
 import modelo.Usuario;
 import util.Fecha;
@@ -80,7 +78,7 @@ public class SimulacionesDAO implements OperacionesDAO {
     private void crearTablaSimulaciones() throws SQLException{
         java.sql.Statement sentencia = db.createStatement();
  
-        sentencia.executeUpdate("CREATE TABLE usuarios("
+        sentencia.executeUpdate("CREATE TABLE simulaciones("
                 + "idUsr VARCHAR(20) NOT NULL,"
                 + "fecha DATE NOT NULL,"
                 + "mundo VARCHAR (10) NOT NULL"
@@ -120,7 +118,7 @@ public class SimulacionesDAO implements OperacionesDAO {
      */    
     public Simulacion obtener(String idSimulacion) throws DatosException {    
         try {
-            rsSimulaciones=sentenciaSim.executeQuery("SELECT * FROM usuarios WHERE isSim ='"+ idSimulacion +"'");
+            rsSimulaciones=sentenciaSim.executeQuery("SELECT * FROM simulaciones WHERE idSim ='"+ idSimulacion +"'");
  
             //Establece columndas y etiquetas
             establecerColumnasModelo();
@@ -181,7 +179,7 @@ public class SimulacionesDAO implements OperacionesDAO {
 	 */
 	public List<Simulacion> obtenerTodos() {
 		ResultSet rs = null;
-		String sql = "SELECT * FROM Simulaciones";
+		String sql = "SELECT * FROM simulaciones";
 		try {
 			java.sql.Statement s =  db.createStatement();
 			rs = s.executeQuery(sql);
@@ -214,7 +212,6 @@ public class SimulacionesDAO implements OperacionesDAO {
 			e.printStackTrace();
 		}
 		throw new DatosException("Alta: " + simulacion.getIdSimulacion() + " ya existe.");
-	}
 
 	@Override
 	public Object baja(String id) throws DatosException {
@@ -257,4 +254,5 @@ public class SimulacionesDAO implements OperacionesDAO {
             e.printStackTrace();
         }
     }
+
 }
