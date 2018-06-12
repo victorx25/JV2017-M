@@ -54,15 +54,7 @@ public class SimulacionesDAO implements OperacionesDAO {
      *  @return instancia
      */
     public static SimulacionesDAO getInstancia() {
-        if (instancia == null) {
-            try {
-                instancia = new SimulacionesDAO();
-            }
-            catch(SQLException | DatosException e){
-                e.printStackTrace();
-            }
-        }
-        return instancia;
+       return null;
     }
  
     /**
@@ -71,10 +63,7 @@ public class SimulacionesDAO implements OperacionesDAO {
      * @throws DatosException
      */
     private SimulacionesDAO() throws SQLException, DatosException {
-        inicializar();
-        if (obtener("III1R")==null) {
-            cargarPredeterminados();
-        }
+    
     }
  
     /**
@@ -83,18 +72,10 @@ public class SimulacionesDAO implements OperacionesDAO {
      * @throws SQLException
      */
     private void inicializar()throws SQLException{
-        bufferObjetos=new ArrayList<Object>();
-        db=Conexion.getDb();
-        try {
-            obtener("III1R");
-            obtener("AAAOT");
+   
  
-        }
-        catch(DatosException e) {
-            crearTablaSimulaciones();
- 
-        }
-    }
+      }
+   
  
     private void crearTablaSimulaciones() throws SQLException{
         java.sql.Statement sentencia = db.createStatement();
@@ -114,19 +95,7 @@ public class SimulacionesDAO implements OperacionesDAO {
      *  Método para generar de datos predeterminados.
      */
     private void cargarPredeterminados() throws SQLException, DatosException {
-        Simulacion simulacionDemo = null;
-        try {
-            // Obtiene usuario y mundo predeterminados.
-            Usuario usrPredeterminado = UsuariosDAO.getInstancia().obtener("III1R");
-            Mundo mundoPredeterminado = MundosDAO.getInstancia().obtener("Demo0");
-            simulacionDemo = new Simulacion(usrPredeterminado,  
-                    new Fecha(2005, 05, 05), mundoPredeterminado,  
-                    EstadoSimulacion.PREPARADA);
-            alta(simulacionDemo);
-        }  
-        catch (DatosException e) {
-            e.printStackTrace();
-        }
+     
     }
  
  
