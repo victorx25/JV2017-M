@@ -18,6 +18,8 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
+import com.db4o.ObjectSet;
+import com.db4o.query.Query;
 import com.mysql.jdbc.Connection;
 
 import accesoDatos.DatosException;
@@ -233,7 +235,17 @@ public class SimulacionesDAO implements OperacionesDAO {
 	
 	@Override
 	public String listarDatos() {
-		// TODO Auto-generated method stub
+		StringBuilder listado = new StringBuilder();
+		ObjectSet<Simulacion> result = null;
+		Query consulta = db.query();
+		consulta.constrain(Simulacion.class);	
+		result = consulta.execute();
+		if (result.size() > 0) {
+			for (Simulacion simul: result) {
+				listado.append("\n" + simul);
+			}
+			return listado.toString();
+		}
 		return null;
 	}
 
