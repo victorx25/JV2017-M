@@ -225,12 +225,24 @@ public class SimulacionesDAO implements OperacionesDAO {
 		
 	}
 
+	/**
+	 * Método para listar datos con consultas sql
+	 * @author GRUPO 1 DAM - Víctor Matínez Martínez
+	 * @date 13/06/2018
+	 */
+	
 	@Override
 	public String listarDatos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Método para listar Ids con consultas sql
+	 * @author GRUPO 1 DAM - Víctor Matínez Martínez
+	 * @date 13/06/2018
+	 */
+	
 	@Override
 	public String listarId() {
 		// TODO Auto-generated method stub
